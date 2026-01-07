@@ -110,7 +110,7 @@ button{
         </div>
         <div class="step">
           <span>In Transit</span>
-          <small>En Route</small>
+          <small>On Route</small>
         </div>
         <div class="step">
           <span>Destination</span>
@@ -122,7 +122,7 @@ button{
 </div>
 
 <script>
-const TRACK_CODE = "XX-UK92502";
+const VALID_CODES = ["XX-UK92502","XX-UK-92502"];
 const AUTO_HIDE = 120000;
 
 const DATA = [
@@ -141,8 +141,9 @@ const DATA = [
   "<b>Departure:</b> Left Yemen at 12:28 PM, 07 Jan 2026"
 ];
 
-let hideTimer;
 const departureDate = new Date(2026,0,7,12,28,0);
+const timer = document.getElementById("timer");
+let hideTimer;
 
 function updateTimer(){
   const now = new Date();
@@ -172,7 +173,7 @@ function track(){
   setTimeout(()=>{
     loader.style.display="none";
 
-    if(input !== TRACK_CODE){
+    if(!VALID_CODES.includes(input)){
       alert("❌ Invalid Tracking Code");
       return;
     }
